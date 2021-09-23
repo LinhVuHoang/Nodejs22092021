@@ -24,8 +24,12 @@ const ApiError = require('../utils/ApiError');
  */
  const createNews = async (newsBody) => {
     //function createUser-tạo mới người dùng với tham số userBody
+    try{
       return News.create(newsBody);
       //tạo một obj mới tỏng user với userbody
+    }catch(error){
+      console.log(error);
+    }
     };
     
     /**
@@ -37,7 +41,7 @@ const ApiError = require('../utils/ApiError');
      * @param {number} [options.page] - Current page (default = 1)
      * @returns {Promise<QueryResult>}
      */
-    const getNews = async (filter, options) => {
+    const queryNews = async (filter, options) => {
       const news = await News.paginate(filter, options);
       //phân trang và lựa chọn
       return news;
@@ -69,7 +73,7 @@ const ApiError = require('../utils/ApiError');
      */
     //update user với id
     const updateNews = async (newsId, updateBody) => {
-      const news = await getUserById(newsId);
+      const news = await getNewsById(newsId);
       if (!news) {
         throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
       }
@@ -88,7 +92,7 @@ const ApiError = require('../utils/ApiError');
      */
     //xóa user bằng id
     const deleteNews = async (newsId) => {
-      const news = await getUserById(newsId);
+      const news = await getNewsById(newsId);
       if (!news) {
         throw new ApiError(httpStatus.NOT_FOUND, 'news not found');
       }
@@ -97,7 +101,7 @@ const ApiError = require('../utils/ApiError');
     };
     
     module.exports = {
-        getNews,
+        queryNews,
          getNewsById,
          
             createNews,

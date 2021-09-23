@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
-
+//import thư viện và class
 
 const newsSchema = mongoose.Schema({
-   
+   //tạo obj mới trong database
     title: {
-        type: 'String',
-        required: true,
-        trim: true,
-        uppercase: true,
-        minLengthen: 10,
-        maxLengthen: 100,
+        //obj title và các property của nó
+        type: 'String', //kiểu biến
+        required: true //
     },
     // created: {
     //     type: 'Date',
@@ -19,7 +16,6 @@ const newsSchema = mongoose.Schema({
     author: {
         type: 'String',
         required: true,
-        trim: true,
     },
     category: {
         type: 'String',
@@ -28,20 +24,17 @@ const newsSchema = mongoose.Schema({
     content: {
         type: 'String',
         required: true,
-        trim: true,
-        minLengthen: 100,
 
     },
     image: {
         type: 'String',
-        trim: true,
     },
     comments: {
         type: 'String',
-        trim: true,
+
 
     },
-},
+ },
     
     {
         timestamps: true,
@@ -51,7 +44,9 @@ const newsSchema = mongoose.Schema({
 newsSchema.plugin(toJSON);
 newsSchema.plugin(paginate);
 
-
+/**
+ * @typedef News
+ */
 
 const News = mongoose.model('News', newsSchema);
 

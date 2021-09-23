@@ -5,16 +5,15 @@ const validate= require('../../middlewares/validate')
 const newsValidations = require('../../validations/news.validation');
 const newsController = require('../../controllers/news.controller');
 const router = express.Router();
-
+//khai báo routers và các middlewares
 router.get('/getNews',validate(newsValidations.getNews),newsController.getNews);
 
-router.get('/news/:newsId',validate(newsValidations.getNewsById), newsController.getNewsById);
-
+router.get('/:newsId',validate(newsValidations.getNewsById), newsController.getNewsById);
 router.post('/createNews',validate(newsValidations.createNews), newsController.createNews);
 
-router.put('/updateNews',auth('manageUsers'),validate(newsValidations.updateNews), newsController.updateNews);
+router.put('/:newsId', validate(newsValidations.updateNews), newsController.updateNews);
 
-router.delete('/deleteNews',auth('manageUsers'),validate(newsValidations.deleteNews), newsController.deleteNews);
+router.delete('/:newsId',validate(newsValidations.deleteNews), newsController.deleteNews);
 
 
 module.exports = router;
